@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eef8fc;
+  --color-primary-100: #d4eef7;
+  --color-primary-200: #a8dcf0;
+  --color-primary-300: #6ec3e5;
+  --color-primary-400: #4BA2CE;
+  --color-primary-500: #3498c9;
+  --color-primary-600: #2e86b0;
+  --color-primary-700: #1e7bac;
+  --color-primary-800: #1a6590;
+  --color-primary-900: #164e70;
+  --font-sans: "Noto Sans TC", "Segoe UI", "Microsoft JhengHei", sans-serif;
+}
+
+:root {
+  color: #1a1a2e;
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── 字體縮放（data-fscale 屬性控制） ── */
+/* 預設（md）：16px 基準，符合 WCAG AA 中文建議 */
+html[data-fscale="sm"] { font-size: 14px; }
+html[data-fscale="md"] { font-size: 16px; }
+html[data-fscale="lg"] { font-size: 19px; }
+/* 未設定時 fallback 到 16px */
+html:not([data-fscale]) { font-size: 16px; }
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 40px white inset !important;
+  -webkit-text-fill-color: #1a1a2e !important;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── 字體縮放滑桿樣式 ── */
+.font-scale-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    #4BA2CE 0%,
+    #4BA2CE var(--thumb-pct, 50%),
+    #e5e7eb var(--thumb-pct, 50%),
+    #e5e7eb 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+.font-scale-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #4BA2CE;
+  box-shadow: 0 2px 8px rgba(75, 162, 206, 0.35);
+  cursor: grab;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.font-scale-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  box-shadow: 0 3px 14px rgba(75, 162, 206, 0.5);
+  transform: scale(1.12);
+}
+.font-scale-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #4BA2CE;
+  box-shadow: 0 2px 8px rgba(75, 162, 206, 0.35);
+  cursor: grab;
+}
+
+/* ── 底部字級面板滑入動畫 ── */
+@keyframes slideUpPanel {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+.font-scale-panel {
+  animation: slideUpPanel 0.22s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+
+@media print {
+  .no-print,
+  nav,
+  header {
+    display: none !important;
+  }
+
+  * {
+    overflow: visible !important;
+    scrollbar-width: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  html, body, #root {
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
+
+  .print-page {
+    page-break-after: always;
+  }
+
+  .print-page:last-child {
+    page-break-after: avoid;
+  }
+
+  .report-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 8pt;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .report-table th,
+  .report-table td {
+    border: 1px solid #333;
+    padding: 1px 3px;
+    vertical-align: top;
+  }
+
+  .report-table th {
+    background-color: #eee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .report-table td {
+    word-break: break-all;
+  }
+
+  .print-area {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+}

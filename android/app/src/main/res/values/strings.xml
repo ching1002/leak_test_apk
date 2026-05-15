@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PW Repair Test</string>
+    <string name="title_activity_main">PW Repair Test</string>
+    <string name="package_name">tw.gov.water.pwrepair.mock</string>
+    <string name="custom_url_scheme">tw.gov.water.pwrepair.mock</string>
+</resources>
