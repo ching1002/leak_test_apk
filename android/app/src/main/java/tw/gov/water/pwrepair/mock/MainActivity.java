@@ -8,12 +8,15 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 
+import androidx.activity.OnBackPressedCallback;
+
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        disableSystemBackExit();
         enableFullscreen();
     }
 
@@ -29,6 +32,15 @@ public class MainActivity extends BridgeActivity {
         if (hasFocus) {
             enableFullscreen();
         }
+    }
+
+    private void disableSystemBackExit() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                enableFullscreen();
+            }
+        });
     }
 
     private void enableFullscreen() {
